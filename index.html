@@ -184,6 +184,11 @@
     width:16px; height:16px; line-height:1; border-radius:50%; display:flex; align-items:center; justify-content:center;
   }
   .chip button:hover{background:var(--danger); color:var(--accent-ink);}
+  .chip-pending{border-style:dashed;}
+  .pending-tag{
+    font-style:normal; font-size:9.5px; font-weight:700; letter-spacing:.02em; text-transform:uppercase;
+    background:var(--gold-soft); color:var(--gold); padding:2px 6px; border-radius:999px; white-space:nowrap;
+  }
   .tag{
     flex:none; font-size:9.5px; font-weight:700; letter-spacing:.02em; padding:2px 7px; border-radius:999px;
     white-space:nowrap; text-transform:uppercase;
@@ -231,43 +236,48 @@
     border-radius:10px; padding:10px 14px; margin-bottom:16px; line-height:1.55;
   }
   .rule-note b{color:var(--ink);}
-  .booth-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px; margin-bottom:16px;}
+  .booth-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; margin-bottom:16px;}
   .booth-card{
-    background:var(--surface); border:1px solid var(--rule); border-radius:14px; overflow:hidden;
+    background:var(--surface); border:1px solid var(--rule); border-radius:16px; overflow:hidden;
     box-shadow:var(--shadow); display:flex; flex-direction:column;
   }
   .booth-banner{
-    height:90px; position:relative; overflow:hidden;
+    aspect-ratio:1/1; position:relative; overflow:hidden;
     background:linear-gradient(135deg, var(--gold-soft), var(--surface-2));
     display:flex; align-items:center; justify-content:center;
   }
   .booth-banner img{width:100%; height:100%; object-fit:cover; display:block;}
   .booth-banner .banner-fallback{
-    font-family:'Noto Serif',serif; font-weight:700; font-size:28px; color:var(--gold); opacity:.55;
+    font-family:'Be Vietnam Pro',sans-serif; font-weight:800; font-size:12.5px; letter-spacing:.08em;
+    color:var(--gold); opacity:.6; text-transform:uppercase; text-align:center; padding:0 14px;
   }
   .booth-status{
     position:absolute; top:8px; right:8px; font-size:10px; font-weight:700; text-transform:uppercase;
-    letter-spacing:.03em; padding:3px 8px; border-radius:999px;
-    background:var(--surface); color:var(--ink-muted); border:1px solid var(--rule);
+    letter-spacing:.03em; padding:3px 8px; border-radius:999px; z-index:2;
+    background:rgba(255,255,255,.9); color:var(--ink-muted); border:1px solid var(--rule);
   }
   .booth-status.approved{background:var(--ok); color:var(--accent-ink); border-color:var(--ok);}
-  .booth-body{padding:12px 14px; display:flex; flex-direction:column; gap:5px;}
-  .booth-name{font-family:'Noto Serif',serif; font-weight:700; font-size:15px;}
-  .booth-row{font-size:12.5px; color:var(--ink-muted);}
-  .booth-row b{color:var(--ink); font-weight:600;}
-  .booth-foot{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:6px;}
-  .booth-actions{display:flex; gap:4px;}
-  .village-tag{
-    font-size:11px; font-weight:600; background:var(--gold-soft); color:var(--gold);
-    padding:2px 9px; border-radius:999px; white-space:nowrap;
+  .booth-actions{
+    position:absolute; top:8px; left:8px; display:flex; gap:4px; z-index:2;
+  }
+  .booth-plaque{
+    background:var(--accent); color:var(--accent-ink);
+    padding:14px 16px 16px; display:flex; flex-direction:column; gap:3px;
+  }
+  .booth-name{
+    font-family:'Noto Serif',serif; font-weight:900; font-size:18px; line-height:1.2;
+    text-transform:uppercase; text-wrap:balance;
+  }
+  .booth-owner, .booth-item{
+    font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:.05em; opacity:.9;
   }
   .icon-btn{
-    border:none; background:transparent; color:var(--ink-muted); cursor:pointer; font-size:15px;
-    width:28px; height:28px; border-radius:8px;
+    border:none; background:rgba(42,24,16,.55); color:#fff; cursor:pointer; font-size:14px;
+    width:26px; height:26px; border-radius:8px; backdrop-filter:blur(2px);
   }
-  .icon-btn:hover{background:var(--surface-2); color:var(--danger);}
-  .icon-btn.approve-btn:hover{color:var(--ok);}
-  .icon-btn.approve-btn.is-approved{color:var(--ok);}
+  .icon-btn:hover{background:var(--danger); color:#fff;}
+  .icon-btn.approve-btn:hover{background:var(--ok);}
+  .icon-btn.approve-btn.is-approved{background:var(--ok);}
   .form-card{
     background:var(--surface-2); border:1px solid var(--rule); border-radius:14px; padding:16px;
     display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end;
@@ -277,6 +287,12 @@
   .field input, .field select{
     border:1px solid var(--rule); background:var(--surface); color:var(--ink); border-radius:8px; padding:8px 10px;
   }
+  .field input[type="file"]{padding:6px 8px; font-size:12.5px;}
+  .banner-preview{
+    margin-top:4px; width:64px; height:64px; border-radius:8px; overflow:hidden; border:1px solid var(--rule);
+    display:none; background:var(--surface-2);
+  }
+  .banner-preview img{width:100%; height:100%; object-fit:cover; display:block;}
   .limit-note{font-size:12.5px; color:var(--ink-muted); margin-top:8px;}
   .limit-note.full{color:var(--accent); font-weight:600;}
 
@@ -288,6 +304,46 @@
   .stage h3{font-size:17px; margin-top:10px;}
   .stage p{font-size:13px; color:var(--ink-muted); line-height:1.55; margin:6px 0 0;}
   .stage-num{position:absolute; top:14px; right:14px; font-family:'Noto Serif',serif; font-weight:700; color:var(--gold); opacity:.5; font-size:13px;}
+
+  /* ---------- saga / storytelling chapters ---------- */
+  .saga{margin-top:30px;}
+  .saga-list{
+    display:flex; flex-direction:column; gap:0;
+    border:1px solid var(--rule); border-radius:16px; background:var(--surface);
+    box-shadow:var(--shadow); overflow:hidden;
+  }
+  .saga-chapter{
+    display:flex; gap:18px; padding:24px 24px; position:relative;
+  }
+  .saga-chapter + .saga-chapter{border-top:1px dashed var(--rule);}
+  .saga-chapter::before{
+    content:""; position:absolute; left:24px; top:0; bottom:0; width:2px;
+    background:linear-gradient(var(--gold-soft), transparent);
+    opacity:.5; display:none;
+  }
+  .saga-num{
+    flex:none; width:54px; text-align:center;
+    font-family:'Noto Serif',serif; font-weight:900; font-size:34px; line-height:1;
+    color:var(--gold); opacity:.45;
+  }
+  .saga-text{flex:1; min-width:0;}
+  .saga-kicker{
+    font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);
+  }
+  .saga-text h3{
+    font-size:19px; margin-top:4px; margin-bottom:10px; color:var(--ink);
+  }
+  .saga-text p{
+    font-size:13.5px; line-height:1.85; color:var(--ink-muted); margin:0; text-align:justify;
+  }
+  .kw{
+    background:var(--gold-soft); color:var(--gold); font-weight:700;
+    padding:1px 7px; border-radius:6px; box-decoration-break:clone; -webkit-box-decoration-break:clone;
+  }
+  @media (max-width:640px){
+    .saga-chapter{gap:12px; padding:18px 16px;}
+    .saga-num{width:34px; font-size:24px;}
+  }
 
   footer{margin-top:34px; text-align:center; color:var(--ink-muted); font-size:12px;}
   [hidden]{display:none !important;}
@@ -342,10 +398,10 @@
   </header>
 
   <nav class="tabbar" role="tablist">
-    <button class="tabbtn" role="tab" data-tab="villages" aria-selected="true"><span class="seal">01</span>Hội Làng</button>
-    <button class="tabbtn" role="tab" data-tab="pho-hoi" aria-selected="false"><span class="seal">02</span>Phố Hội</button>
-    <button class="tabbtn" role="tab" data-tab="khoa-cu" aria-selected="false"><span class="seal">03</span>Khoa Cử</button>
-    <button class="tabbtn" role="tab" data-tab="timeline" aria-selected="false"><span class="seal">04</span>Timeline</button>
+    <button class="tabbtn" role="tab" data-tab="timeline" aria-selected="false"><span class="seal">01</span>Hành trình</button>
+    <button class="tabbtn" role="tab" data-tab="villages" aria-selected="true"><span class="seal">02</span>Danh sách làng</button>
+    <button class="tabbtn" role="tab" data-tab="pho-hoi" aria-selected="false"><span class="seal">03</span>Phố Hội</button>
+    <button class="tabbtn" role="tab" data-tab="khoa-cu" aria-selected="false"><span class="seal">04</span>Khoa Cử</button>
   </nav>
 
   <!-- 01 VILLAGES -->
@@ -365,30 +421,28 @@
   <section class="panel" data-panel="pho-hoi" hidden>
     <div class="panel-head">
       <h2>Gian hàng Phố Hội</h2>
-      <span class="panel-note">Tối đa 6 gian hàng để đảm bảo vận hành</span>
+      <span class="panel-note" id="pho-hoi-note">Tối đa 6 gian hàng để đảm bảo vận hành</span>
+      <button class="btn ghost" id="live-refresh-btn" hidden title="Tải lại dữ liệu mới nhất">⟳ Làm mới</button>
     </div>
     <div class="rule-note"><b>Thể lệ:</b> Do số lượng giới hạn, BTC sẽ duyệt và công bố những gian hàng trúng thầu phù hợp nhất với không gian phố hội. Đăng ký sớm có thể là lợi thế. Gian hàng gửi bên dưới sẽ ở trạng thái "Chờ duyệt" cho đến khi được BTC duyệt.</div>
     <div class="booth-grid" id="booth-list"></div>
     <div class="form-card">
       <div class="field">
-        <label for="booth-village">Làng phụ trách</label>
-        <select id="booth-village"></select>
-      </div>
-      <div class="field">
         <label for="booth-name">Tên gian hàng</label>
         <input id="booth-name" type="text" placeholder="VD: Bánh nướng Làng Hạ" maxlength="60">
       </div>
       <div class="field">
-        <label for="booth-owner">Chủ gian hàng</label>
-        <input id="booth-owner" type="text" placeholder="Tên người phụ trách" maxlength="60">
+        <label for="booth-owner">Chủ gian hàng (họ tên đầy đủ)</label>
+        <input id="booth-owner" type="text" placeholder="Họ tên đầy đủ" maxlength="60">
       </div>
       <div class="field">
         <label for="booth-item">Mặt hàng</label>
         <input id="booth-item" type="text" placeholder="VD: Bánh nướng, bánh dẻo" maxlength="80">
       </div>
       <div class="field">
-        <label for="booth-banner">Banner (link ảnh, không bắt buộc)</label>
-        <input id="booth-banner" type="text" placeholder="https://…" maxlength="300">
+        <label for="booth-banner-file">Ảnh banner (không bắt buộc)</label>
+        <input id="booth-banner-file" type="file" accept="image/*">
+        <div class="banner-preview" id="booth-banner-preview"><img id="booth-banner-preview-img" alt=""></div>
       </div>
       <button class="btn" id="booth-add-btn">Thêm gian hàng</button>
     </div>
@@ -433,9 +487,47 @@
         <p>Trạng Nguyên thực hiện nghi thức vinh quy bái tổ, đoàn tùy tùng 4–8 người rước từ sân khấu ra pantry phá cỗ.</p>
       </div>
     </div>
+
+    <div class="saga">
+      <div class="panel-head"><h2>Câu chuyện hành trình</h2><span class="panel-note">Bốn chương kể lại một ngày hội — từ làng lên kinh đến ngày vinh quy</span></div>
+      <div class="saga-list">
+        <article class="saga-chapter">
+          <div class="saga-num" aria-hidden="true">01</div>
+          <div class="saga-text">
+            <div class="saga-kicker">Chương 01</div>
+            <h3>Từ Làng Vào Kinh</h3>
+            <p>Trong lịch sử khoa cử Việt Nam, để tuyển chọn người tài, các sĩ tử lần lượt trải qua những kỳ thi với cấp độ ngày càng cao. <span class="kw">Thi Hương</span> là kỳ thi được tổ chức ở địa phương, những người đỗ kỳ thi Hương được gọi là <span class="kw">Cử nhân</span> và đủ điều kiện bước vào kỳ thi tiếp theo. <span class="kw">Thi Hội</span> là kỳ thi cấp quốc gia được tổ chức tại kinh đô, tiếp tục tuyển chọn những người xuất sắc nhất; những người đỗ kỳ thi Hội được cấp bằng <span class="kw">Tiến sĩ</span>. Sau đó, họ bước vào <span class="kw">Thi Đình</span> – kỳ thi cuối cùng để xếp hạng những người đã đỗ Tiến sĩ, tìm ra những người đứng đầu khoa cử. Và trong một ngày thu, hành trình ấy bắt đầu từ những ngôi làng của chúng mình. <span class="kw">48 sĩ tử</span> đến từ <span class="kw">8 làng</span> đã vượt qua các kỳ thi Hương, thi Hội, mang danh vị Tiến sĩ và hội tụ về kinh thành, sẵn sàng bước vào cuộc thi cuối cùng để tìm ra người đứng đầu. Từ làng vào kinh, hành trình tìm ra người đứng đầu khoa cử chính thức bắt đầu.</p>
+          </div>
+        </article>
+        <article class="saga-chapter">
+          <div class="saga-num" aria-hidden="true">02</div>
+          <div class="saga-text">
+            <div class="saga-kicker">Chương 02</div>
+            <h3>Phố Hội</h3>
+            <p>Từ các làng, những người đi hội cùng các sĩ tử cũng đã lên kinh. Bởi kinh thành hôm nay không chỉ có khoa cử, mà hội đã mở. Phố xá rộn ràng, hàng quán bắt đầu lên đèn, những gian hàng từ các làng cũng góp mặt, tạo nên một <span class="kw">Phố Hội</span> náo nhiệt giữa kinh thành. Trước khi <span class="kw">tiếng trống khai khoa</span> vang lên, hãy cùng những người đi hội ghé các hàng quán, gặp gỡ, vui chơi và cùng nhau dự hội. Nhưng khi tiếng trống khai khoa vang lên, Phố Hội sẽ tạm gác lại. Bởi những sĩ tử đã sẵn sàng bước vào kỳ thi quan trọng nhất.</p>
+          </div>
+        </article>
+        <article class="saga-chapter">
+          <div class="saga-num" aria-hidden="true">03</div>
+          <div class="saga-text">
+            <div class="saga-kicker">Chương 03</div>
+            <h3>Khoa Cử</h3>
+            <p><span class="kw">48 sĩ tử</span> đến từ <span class="kw">8 làng</span> sẽ cùng nhau bước vào cuộc <span class="kw">Thi Đình</span> để tranh tài và tìm ra người đứng đầu. Không phải ai cũng bước vào sân thi, nhưng ai cũng có thể góp sức để đưa sĩ tử của làng mình đi xa hơn. 48 sĩ tử cùng bước vào sân thi và lần lượt trả lời các câu hỏi. Trả lời đúng, tiếp tục ở lại; trả lời sai, rời khỏi sân chơi. Khi trên sân chỉ còn dưới 3 sĩ tử, cuộc thi sẽ tạm dừng để bước vào phần giải cứu. Lúc này, những người còn lại trong các làng sẽ cùng bước vào cuộc chơi để tìm cách đưa sĩ tử của mình trở lại. Sĩ tử thi trên sân, <span class="kw">cả làng tiếp sức phía sau</span>.</p>
+          </div>
+        </article>
+        <article class="saga-chapter">
+          <div class="saga-num" aria-hidden="true">04</div>
+          <div class="saga-text">
+            <div class="saga-kicker">Chương 04</div>
+            <h3>Vinh Quy Bái Tổ</h3>
+            <p>Sau những vòng tranh tài, một người duy nhất được lựa chọn trở thành <span class="kw">Trạng Nguyên</span>. Từ làng lên kinh, sĩ tử mang theo kỳ vọng của những người phía sau. Và khi đỗ đạt, họ không ở lại một mình nơi kinh thành. Họ trở về để <span class="kw">vinh quy bái tổ</span>. Người chiến thắng được vinh danh, thực hiện nghi thức rước Vinh Quy trở về làng và cùng những người đã đồng hành với mình tham dự <span class="kw">Yến Hội</span>. Bởi thành quả hôm nay không chỉ thuộc về một sĩ tử. Một người bước lên bảng vàng, nhưng cả làng đã cùng đi đến đó. Và khi một người vinh hoa, cả làng cùng mở hội, cùng chung một yến hội.</p>
+          </div>
+        </article>
+      </div>
+    </div>
   </section>
 
-  <footer>Sổ Bộ Hội Làng · bản xem tĩnh xuất lúc 15/09/2026 12:42 UTC — dữ liệu là ảnh chụp tại thời điểm xuất, không tự cập nhật. Xem bản đầy đủ, cập nhật trực tiếp tại trang gốc trên Claude.</footer>
+  <footer>Sổ Bộ Hội Làng · bản xem tĩnh xuất lúc 16/09/2026 05:24 UTC — dữ liệu là ảnh chụp tại thời điểm xuất, không tự cập nhật. Xem bản đầy đủ, cập nhật trực tiếp tại trang gốc trên Claude.</footer>
 </div>
 
 <script>
@@ -452,7 +544,7 @@
   var CHEVRON_SVG = '<svg viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   var IS_STATIC_EXPORT = true; window.IS_STATIC_EXPORT = true;
-  var STATIC_EXPORTED_AT = "15/09/2026 12:42 UTC"; window.STATIC_EXPORTED_AT = STATIC_EXPORTED_AT;
+  var STATIC_EXPORTED_AT = "16/09/2026 05:24 UTC"; window.STATIC_EXPORTED_AT = STATIC_EXPORTED_AT;
   var STATIC_VILLAGES = {"v1": {"name": "Làng X", "members": ["Hoàng Lê Đức Anh", "Lâm Kiên Cường", "Lê Việt Hoàng", "Nguyễn Khắc Thảo", "Nguyễn Ngọc Gia Bảo", "Nguyễn Như Trang", "Nguyễn Thanh Hải", "Nguyễn Thúy Thanh", "Nguyễn Thế Oai", "Nguyễn Thị Thu Hà", "Nguyễn Việt Hoàng", "Nguyễn Văn Dương", "Nguyễn Văn Linh", "Nguyễn Văn Quang", "Nguyễn Văn Thủy", "Nguyễn Văn Tuấn", "Nguyễn Đình Thi", "Nguyễn Đức Dương", "Nguyễn Đức Sáng", "Nhữ Đình Thao", "Phan Văn Chương", "Phạm Duy Anh", "Trương Quang Trường", "Trần Thế Mạnh", "Trịnh Quang Hùng", "Trịnh Thành Công", "Trịnh Thị Hiếu", "Tống Thị Thu Thủy", "Vũ Huy Hoàng", "Vũ Phương Thảo", "Đậu Danh Thái", "Đặng Quang Minh", "Đặng Xuân Ngọc", "Đỗ Sinh Hùng"]}, "v2": {"name": "Làng 1945", "members": ["Bàn Hà Tân", "Dương Ngọc Tuân", "Hoàng Anh Dũng", "Hoàng Anh Đức", "Hồ Yến Hoa", "Lê Nguyên Khang", "Lê Văn An", "Lê Văn Hương", "Lưu Quang Vũ", "Lương Thị Hòa", "Nguyễn Huy Hoàng", "Nguyễn Khắc Hiếu", "Nguyễn Lan Nhi", "Nguyễn Thanh Huyền", "Nguyễn Thế Hiếu", "Phạm Công Hoàng", "Phạm Minh Quân", "Phạm Trung Thành", "Phạm Văn Hùng", "Trương Minh Ngọc", "Trần Thị Phương Thảo", "Trịnh Thị Phương", "Võ Hồng Giàu", "Vũ Ngọc Anh", "Vũ Văn Đồng", "Vương Trung Ân", "Đặng Bá Vương", "Đặng Thanh Quang", "Đặng Thị Thu Tú", "Đỗ Thu Hà", "Đỗ Thị Thanh Huyền", "Đỗ Văn Linh"]}, "v3": {"name": "Làng ProGD", "members": ["Bùi Hà My", "Dương Nhật Quang", "Hoàng Hữu Thảo", "Hồ Ngọc Khánh Linh", "Lê Gia Thiện", "Lê Phương Thùy", "Lê Xuân Cường", "Lại Quốc Trung", "Nguyễn Bảo Long", "Nguyễn Hoàng Đức Trung", "Nguyễn Mai Phương", "Nguyễn Mạnh Dương", "Nguyễn Tùng Dương", "Nguyễn Việt Bách", "Nguyễn Đăng Bá Khôi", "Ngô Thành Trung", "Phạm Bá Danh", "Phạm Khôi Nguyên", "Phạm Ngọc Huy Hoàng", "Trần Kim Cương", "Trần Thị Bảo Ngọc", "Trần Thị Giang", "Vũ Chí Thanh", "Vũ Hữu Trọng", "Đinh Gia Bảo", "Đoàn Bá Sơn", "Đặng Thanh Sang", "Đỗ Văn Phong"]}, "v4": {"name": "App + Galaxiga", "members": ["Bùi Hoàng Lộc", "Dương Thị Thanh Huyền", "Hoàng Minh Hoàng", "Hoàng Quốc Việt", "Hoàng Thị Thùy Chi", "Hoàng Đức Mạnh", "Lê Ngọc Duy", "Lê Thu Hà", "Nguyễn Chí Quân", "Nguyễn Hoàng Châu Anh", "Nguyễn Hoàng Hải", "Nguyễn Ngọc Tân", "Nguyễn Nhật Phong", "Nguyễn Thái Bảo", "Nguyễn Thị Bông", "Nguyễn Thị Truyền", "Nguyễn Văn Bằng", "Nguyễn Văn Đạt", "Nguyễn Đình Thành", "Nguyễn Đình Đức", "Nguyễn Đức Hưng", "Nguyễn Đức Kiên", "Trịnh Thu Thủy", "Vũ Đức Trung", "Đào Quang Huân", "Đào Thị Minh Hoà", "Đặng Văn Tùng", "Đặng Đình Nghĩa", "Đỗ Nghĩa Hào"]}, "v5": {"name": "Làng FS + QA", "members": ["Bùi Quang Huy", "Doãn Hồng Dung", "Lê Hà Châu", "Lê Minh Anh", "Nguyễn Gia Phước", "Nguyễn Hồng Vân", "Nguyễn Phương Chi", "Nguyễn Phương Thảo", "Nguyễn Thành Nam Thắng", "Nguyễn Thị Như Quỳnh", "Nguyễn Thị Thu Hòa", "Nguyễn Xuân Tùng", "Phan Huy Dũng", "Phạm Hoài Linh", "Phạm Hoàng Hải", "Trần Mỹ Hạnh", "Trần Thùy Liên", "Trần Tấn Dũng", "Trịnh Thị Lâm Trang", "Vũ Xuân Trường", "Đoàn Thị Thu Hồng", "Đặng Thị Hoa"]}, "v6": {"name": "Làng PlaPuBo", "members": ["Hoàng Ngọc Thành", "Hoàng Tuyên Dương", "Lâm Thanh Bình", "Lê Hoàng Anh", "Lê Huy Hoàng", "Lê Thị Thanh Văn", "Lê Tuấn Anh", "Nguyễn Anh Tú", "Nguyễn Duy Ninh", "Nguyễn Thành Ngọc Anh", "Nguyễn Thị Thúy", "Nguyễn Tuấn Anh", "Nguyễn Viết Mạnh", "Ngụy Hải Tuyến", "Phan Anh Dũng", "Phương Đại Thắng", "Phạm Lê Anh", "Phạm Phúc Bình", "Trần Duy Khánh", "Vũ Hoàng Trung", "Vương Tuấn Kiệt", "Đoàn Văn Nam"]}, "v7": {"name": "Làng MKT 1", "members": ["Bùi Thị Giang", "Hoàng Ngọc Nam", "Hà Quang Tùng", "Hà Thanh Huyền", "Lã Thị Phương Thảo", "Lê Khánh Vy", "Lê Tuấn Linh", "Lại Thúy Nga", "Lại Thị Mai", "Nguyễn Bảo Phú", "Nguyễn Duy Tân", "Nguyễn Hoàng Duy", "Nguyễn Hoàng Vũ", "Nguyễn Thị Minh Trang", "Nguyễn Văn Tuyển", "Ngô Ngọc Lực", "Phạm Ngọc Thế", "Trương Thủy Tiên", "Trần Thị Cúc", "Trần Xuân Hiệp", "Vũ Minh Phước", "Vũ Thị Ngọc", "Vũ Thị Thương", "Đinh Hoàng Anh", "Đào Thúy Hằng", "Đặng Xuân Lãm"]}, "v8": {"name": "Làng MKT2", "members": ["Bùi Văn Trung", "Chu Đức Việt", "Dương Hương Ly", "Hoàng Việt Linh", "Hà Vũ Anh", "Lê Thanh Tuấn", "Lê Thị Anh", "Lê Thị Minh Phương", "Lê Đức Cường", "Lý Viễn Dương", "Lương Minh Hải Vũ", "Mai Phương Linh", "Nghiêm Xuân Nam", "Nguyễn Khánh Linh", "Nguyễn Phụ Đạt", "Nguyễn Thị Trà Giang", "Nguyễn Tuấn Anh", "Phùng Văn Thái", "Phạm Hoàng Dương", "Phạm Thị Thúy Quỳnh", "Trần Hồng Ngọc", "Trần Thị Huệ Anh", "Trần Đình Đắc", "Vũ Thị Bình", "Vũ Thị Duyên", "Vũ Thị Xuân", "Vũ Đức Thắng", "Đào Đức Vũ Minh"]}}; window.STATIC_VILLAGES = STATIC_VILLAGES;
   var STATIC_BOOTHS = []; window.STATIC_BOOTHS = STATIC_BOOTHS;
   var STATIC_CANDIDATES = {"v1": {"villageName": "Làng X", "entries": []}}; window.STATIC_CANDIDATES = STATIC_CANDIDATES;
@@ -670,15 +762,6 @@
   });
 
   // ---------- render: pho hoi tab ----------
-  function renderVillageSelect(){
-    var sel = document.getElementById('booth-village');
-    var current = sel.value;
-    sel.innerHTML = villageIds().map(function(id){
-      return '<option value="' + id + '">' + escapeHtml(villageDisplayName(id)) + '</option>';
-    }).join('');
-    if (current) sel.value = current;
-  }
-
   function renderBooths(){
     var list = document.getElementById('booth-list');
     if (boothsCache.length === 0){
@@ -691,20 +774,17 @@
           '<div class="booth-banner">' +
             (b.bannerUrl ? '<img src="' + escapeHtml(b.bannerUrl) + '" alt="" data-banner-fallback="' + escapeHtml(initial) + '">' : '<span class="banner-fallback">' + escapeHtml(initial) + '</span>') +
             '<span class="booth-status' + (approved ? ' approved' : '') + '">' + (approved ? 'Đã duyệt' : 'Chờ duyệt') + '</span>' +
+            (canWrite ?
+              '<span class="booth-actions">' +
+                '<button class="icon-btn approve-btn' + (approved ? ' is-approved' : '') + '" data-toggle-approve="' + b.id + '" title="' + (approved ? 'Bỏ duyệt' : 'Duyệt gian hàng') + '">' + (approved ? '✓' : '○') + '</button>' +
+                '<button class="icon-btn" data-remove-booth="' + b.id + '" title="Xoá gian hàng">✕</button>' +
+              '</span>' : ''
+            ) +
           '</div>' +
-          '<div class="booth-body">' +
+          '<div class="booth-plaque">' +
             '<div class="booth-name">' + escapeHtml(b.boothName) + '</div>' +
-            '<div class="booth-row"><b>Chủ gian:</b> ' + escapeHtml(b.owner || '—') + '</div>' +
-            '<div class="booth-row"><b>Mặt hàng:</b> ' + escapeHtml(b.item || '—') + '</div>' +
-            '<div class="booth-foot">' +
-              '<span class="village-tag">' + escapeHtml(villageDisplayName(b.villageId)) + '</span>' +
-              (canWrite ?
-                '<span class="booth-actions">' +
-                  '<button class="icon-btn approve-btn' + (approved ? ' is-approved' : '') + '" data-toggle-approve="' + b.id + '" title="' + (approved ? 'Bỏ duyệt' : 'Duyệt gian hàng') + '">' + (approved ? '✓' : '○') + '</button>' +
-                  '<button class="icon-btn" data-remove-booth="' + b.id + '" title="Xoá gian hàng">✕</button>' +
-                '</span>' : ''
-              ) +
-            '</div>' +
+            '<div class="booth-owner">' + escapeHtml(b.owner || '—') + '</div>' +
+            '<div class="booth-item">' + escapeHtml(b.item || '—') + '</div>' +
           '</div>' +
         '</div>';
       }).join('');
@@ -730,7 +810,7 @@
         var b = boothsCache.filter(function(x){ return x.id === id; })[0];
         if (!b) return;
         var next = {
-          villageId: b.villageId, boothName: b.boothName, owner: b.owner,
+          boothName: b.boothName, owner: b.owner,
           item: b.item || '', bannerUrl: b.bannerUrl || '', createdAt: b.createdAt,
           status: b.status === 'approved' ? 'pending' : 'approved'
         };
@@ -740,21 +820,74 @@
 
     var note = document.getElementById('booth-limit-note');
     var full = boothsCache.length >= BOOTH_LIMIT;
+    var writable = canWrite || window.IS_STATIC_EXPORT;
     note.textContent = full ? 'Đã đủ ' + BOOTH_LIMIT + '/' + BOOTH_LIMIT + ' gian hàng — không thể thêm gian hàng mới.' : (BOOTH_LIMIT - boothsCache.length) + ' suất gian hàng còn trống.';
     note.className = 'limit-note' + (full ? ' full' : '');
-    document.getElementById('booth-add-btn').disabled = full || !canWrite;
+    document.getElementById('booth-add-btn').disabled = full || !writable;
   }
+
+  // ---------- image compression helper (banner uploads) ----------
+  // Reads an image File, downsizes it to fit within maxDim x maxDim and
+  // re-encodes as JPEG, returning a base64 data: URI via callback.
+  function compressImageFile(file, maxDim, quality, cb){
+    if (!file){ cb(null); return; }
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      var img = new Image();
+      img.onload = function(){
+        var w = img.naturalWidth, h = img.naturalHeight;
+        var scale = Math.min(1, maxDim / Math.max(w, h));
+        var cw = Math.max(1, Math.round(w * scale)), ch = Math.max(1, Math.round(h * scale));
+        var canvas = document.createElement('canvas');
+        canvas.width = cw; canvas.height = ch;
+        canvas.getContext('2d').drawImage(img, 0, 0, cw, ch);
+        try { cb(canvas.toDataURL('image/jpeg', quality || 0.75)); }
+        catch(e){ cb(null); }
+      };
+      img.onerror = function(){ cb(null); };
+      img.src = ev.target.result;
+    };
+    reader.onerror = function(){ cb(null); };
+    reader.readAsDataURL(file);
+  }
+
+  // Exposed globally so the static export's own appended script (its own
+  // separate IIFE, since it can't see vars/functions inside this one) can
+  // reuse the same compression logic and read/clear the selected banner.
+  window.__compressImageFile = compressImageFile;
+
+  var boothBannerDataUri = '';
+  var boothBannerFileInput = document.getElementById('booth-banner-file');
+  var boothBannerPreview = document.getElementById('booth-banner-preview');
+  var boothBannerPreviewImg = document.getElementById('booth-banner-preview-img');
+  boothBannerFileInput.addEventListener('change', function(){
+    var file = boothBannerFileInput.files && boothBannerFileInput.files[0];
+    if (!file){ boothBannerDataUri = ''; boothBannerPreview.style.display = 'none'; return; }
+    compressImageFile(file, 900, 0.75, function(dataUri){
+      boothBannerDataUri = dataUri || '';
+      if (boothBannerDataUri){
+        boothBannerPreviewImg.src = boothBannerDataUri;
+        boothBannerPreview.style.display = 'block';
+      } else {
+        boothBannerPreview.style.display = 'none';
+      }
+    });
+  });
+  window.__getBoothBannerDataUri = function(){ return boothBannerDataUri; };
+  window.__resetBoothBannerPreview = function(){
+    boothBannerDataUri = '';
+    boothBannerFileInput.value = '';
+    boothBannerPreview.style.display = 'none';
+  };
 
   document.getElementById('booth-add-btn').addEventListener('click', function(){
     if (!db || boothsCache.length >= BOOTH_LIMIT) return;
-    var villageId = document.getElementById('booth-village').value;
     var name = document.getElementById('booth-name').value.trim();
     var owner = document.getElementById('booth-owner').value.trim();
     var item = document.getElementById('booth-item').value.trim();
-    var bannerUrl = document.getElementById('booth-banner').value.trim();
+    var bannerUrl = boothBannerDataUri || '';
     if (!name || !owner) return;
     db.collection('booths').add({
-      villageId: villageId,
       boothName: name,
       owner: owner,
       item: item,
@@ -765,7 +898,9 @@
       document.getElementById('booth-name').value = '';
       document.getElementById('booth-owner').value = '';
       document.getElementById('booth-item').value = '';
-      document.getElementById('booth-banner').value = '';
+      boothBannerFileInput.value = '';
+      boothBannerDataUri = '';
+      boothBannerPreview.style.display = 'none';
     }).catch(function(e){ console.error(e); });
   });
 
@@ -786,15 +921,18 @@
           '<div class="count-line"><b>' + entries.length + '</b>/' + CANDIDATE_LIMIT + ' tiến sĩ đã ghi danh</div>' +
           '<div class="chips">' +
             entries.map(function(e, ei){
-              return '<span class="chip">' + escapeHtml(e.name) + (canWrite ? ' <button data-remove-cand data-village="' + id + '" data-index="' + ei + '" title="Xoá">×</button>' : '') + '</span>';
+              var pending = e.approved === false;
+              return '<span class="chip' + (pending ? ' chip-pending' : '') + '">' + escapeHtml(e.name) + (pending ? ' <em class="pending-tag">chờ duyệt</em>' : '') + (canWrite ? ' <button data-remove-cand data-village="' + id + '" data-index="' + ei + '" title="Xoá">×</button>' : '') + '</span>';
             }).join('') +
           '</div>' +
-          (canWrite ?
-            '<div class="add-row">' +
-              '<input type="text" placeholder="' + (full ? 'Đã đủ ' + CANDIDATE_LIMIT + '/' + CANDIDATE_LIMIT : 'Tên thí sinh') + '" data-focus-key="addcand-' + id + '" data-add-cand-input="' + id + '" maxlength="60" ' + (full ? 'disabled' : '') + '>' +
-              '<button class="btn ghost" data-add-cand-btn="' + id + '" ' + (full ? 'disabled' : '') + '>Ghi danh</button>' +
-            '</div>' : ''
-          ) +
+          (function(){
+            var writable = canWrite || window.IS_STATIC_EXPORT;
+            var off = full || !writable;
+            return '<div class="add-row">' +
+              '<input type="text" placeholder="' + (full ? 'Đã đủ ' + CANDIDATE_LIMIT + '/' + CANDIDATE_LIMIT : 'Tên thí sinh') + '" data-focus-key="addcand-' + id + '" data-add-cand-input="' + id + '" maxlength="60" ' + (off ? 'disabled' : '') + '>' +
+              '<button class="btn ghost" data-add-cand-btn="' + id + '" ' + (off ? 'disabled' : '') + '>Ghi danh</button>' +
+            '</div>';
+          })() +
         '</div>';
       });
       grid.innerHTML = html;
@@ -811,6 +949,7 @@
     });
     grid.querySelectorAll('[data-add-cand-btn]').forEach(function(btn){
       btn.addEventListener('click', function(){
+        if (!db) return;
         var id = btn.dataset.addCandBtn;
         var input = grid.querySelector('[data-add-cand-input="' + id + '"]');
         var name = (input.value || '').trim();
@@ -828,6 +967,10 @@
         if (e.key === 'Enter'){ grid.querySelector('[data-add-cand-btn="' + input.dataset.addCandInput + '"]').click(); }
       });
     });
+
+    if (window.IS_STATIC_EXPORT && typeof window.__wireStaticCandButtons === 'function'){
+      window.__wireStaticCandButtons(grid);
+    }
   }
 
   function writeCandidates(villageId, entries){
@@ -836,6 +979,43 @@
       villageName: villageDisplayName(villageId),
       entries: entries
     }).catch(function(e){ console.error(e); });
+  }
+
+  // ---------- static-export live merge hooks ----------
+  // A static export has no live db; instead an appended script fetches the
+  // Google Sheet responses (booth + candidate registrations, pending or
+  // approved) via a deployed Apps Script Web App and feeds them in here so
+  // they show up on the page even before BTC approval (status: pending).
+  window.__staticSetBooths = function(list){
+    boothsCache = list || [];
+    renderBooths();
+    updateStats();
+  };
+  window.__staticSetCandidates = function(map){
+    candidatesCache = map || {};
+    renderKhoaCu();
+    updateStats();
+  };
+  // The static export also exposes window.__staticRefreshLive (a function
+  // that re-fetches both sheets and re-runs the two setters above) and calls
+  // it on a 30s interval; the manual refresh button below just re-invokes it.
+  if (window.IS_STATIC_EXPORT){
+    var liveRefreshBtn = document.getElementById('live-refresh-btn');
+    if (liveRefreshBtn){
+      liveRefreshBtn.hidden = false;
+      liveRefreshBtn.addEventListener('click', function(){
+        if (typeof window.__staticRefreshLive !== 'function') return;
+        liveRefreshBtn.disabled = true;
+        var oldText = liveRefreshBtn.textContent;
+        liveRefreshBtn.textContent = '⟳ Đang tải…';
+        Promise.resolve(window.__staticRefreshLive()).then(function(){
+          liveRefreshBtn.textContent = '✓ Đã cập nhật';
+          setTimeout(function(){ liveRefreshBtn.textContent = oldText; liveRefreshBtn.disabled = false; }, 1800);
+        }).catch(function(){
+          liveRefreshBtn.textContent = oldText; liveRefreshBtn.disabled = false;
+        });
+      });
+    }
   }
 
   // ---------- boot ----------
@@ -852,7 +1032,6 @@
     }
 
     updateStatus();
-    renderVillageSelect();
     renderVillages();
     renderBooths();
     renderKhoaCu();
@@ -864,7 +1043,6 @@
       snap.docs.forEach(function(doc){
         villagesCache[doc.id] = Object.assign({ id: doc.id }, doc.data());
       });
-      renderVillageSelect();
       renderVillages();
       renderKhoaCu();
       updateStats();
@@ -898,13 +1076,7 @@
 <script>
 (function(){
   if (!window.IS_STATIC_EXPORT) return;
-  var GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScXoJhozirNF9yLNxsB8lvRDjtJ8MFhT3ycUgDQ3XXBqDgM2g/formResponse";
-  var ENTRY = {"village": "entry.972211157", "name": "entry.1198656057", "owner": "entry.1571255338", "item": "entry.152377359", "banner": "entry.1759304972"};
-
-  function villageNameFor(id){
-    var v = (window.STATIC_VILLAGES || {})[id];
-    return v ? v.name : id;
-  }
+  var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx9ubhxd5SoKU6ryApWTrS_iw0Tx8kIWWQZLOFE_43NU7TDkEbwIsfFQ2Ae83DHZAONLA/exec";
 
   var btn = document.getElementById('booth-add-btn');
   var note = document.getElementById('booth-limit-note');
@@ -913,40 +1085,48 @@
   var atLimit = (window.STATIC_BOOTHS || []).length >= 6;
   btn.disabled = atLimit;
   if (note && !atLimit){
-    note.textContent = 'Gian hàng gửi ở đây sẽ được BTC xem xét và duyệt thủ công (chưa hiển thị ngay trên trang tĩnh này).';
+    note.textContent = 'Gian hàng gửi ở đây sẽ được BTC xem xét và duyệt thủ công. Có thể mất một chút thời gian để hiện lên sau khi gửi — bấm "Làm mới" hoặc đợi tự động tải lại.';
     note.className = 'limit-note';
   }
 
   btn.addEventListener('click', function(){
     if (btn.disabled) return;
-    var villageSel = document.getElementById('booth-village');
-    var villageId = villageSel ? villageSel.value : '';
     var name = (document.getElementById('booth-name').value || '').trim();
     var owner = (document.getElementById('booth-owner').value || '').trim();
     var item = (document.getElementById('booth-item').value || '').trim();
-    var banner = (document.getElementById('booth-banner').value || '').trim();
     if (!name || !owner) return;
 
-    var body = new URLSearchParams();
-    body.set(ENTRY.village, villageNameFor(villageId));
-    body.set(ENTRY.name, name);
-    body.set(ENTRY.owner, owner);
-    body.set(ENTRY.item, item);
-    body.set(ENTRY.banner, banner);
+    var bannerDataUri = (typeof window.__getBoothBannerDataUri === 'function') ? window.__getBoothBannerDataUri() : '';
+    var imageBase64 = '';
+    var imageMimeType = '';
+    if (bannerDataUri){
+      var m = /^data:([^;]+);base64,(.*)$/.exec(bannerDataUri);
+      if (m){ imageMimeType = m[1]; imageBase64 = m[2]; }
+    }
+
+    var payload = {
+      type: 'booth',
+      name: name,
+      owner: owner,
+      item: item,
+      imageBase64: imageBase64,
+      imageMimeType: imageMimeType
+    };
 
     var oldText = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Đang gửi…';
 
-    fetch(GOOGLE_FORM_URL, { method: 'POST', mode: 'no-cors', body: body })
+    fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) })
       .then(function(){
         document.getElementById('booth-name').value = '';
         document.getElementById('booth-owner').value = '';
         document.getElementById('booth-item').value = '';
-        document.getElementById('booth-banner').value = '';
+        if (typeof window.__resetBoothBannerPreview === 'function') window.__resetBoothBannerPreview();
         btn.textContent = 'Đã gửi — chờ BTC duyệt \u2713';
-        if (note){ note.textContent = 'Đã gửi đăng ký! BTC sẽ xem xét và duyệt thủ công. Có thể gửi thêm gian khác nếu cần.'; }
+        if (note){ note.textContent = 'Đã gửi đăng ký! Gian hàng sẽ hiện ở trạng thái "chờ duyệt" sau khi tải lại (tự động sau ít lâu, hoặc bấm "Làm mới" ngay).'; }
         setTimeout(function(){ btn.textContent = oldText; btn.disabled = false; }, 2500);
+        if (typeof window.__staticRefreshLive === 'function'){ setTimeout(window.__staticRefreshLive, 3000); }
       })
       .catch(function(err){
         btn.disabled = false;
@@ -954,6 +1134,128 @@
         alert('Gửi thất bại, vui lòng thử lại.');
       });
   });
+})();
+</script>
+
+<script>
+(function(){
+  if (!window.IS_STATIC_EXPORT) return;
+  var GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScxJX2yelvuPmKdLtOgxCHAGn_GqhCwdYDJOo6zfBYILrVlag/formResponse";
+  var ENTRY = {"village": "entry.2091285007", "name": "entry.372508549"};
+  var LIMIT = 6;
+
+  function villageNameFor(id){
+    var v = (window.STATIC_VILLAGES || {})[id];
+    return v ? v.name : id;
+  }
+  function countFor(id){
+    var c = (window.STATIC_CANDIDATES || {})[id];
+    return c && c.entries ? c.entries.length : 0;
+  }
+
+  // Called once at initial load, and again by renderKhoaCu() (in the main
+  // script) every time it re-renders the grid — e.g. after live Sheet data
+  // is merged in — since that regenerates the buttons/inputs from scratch
+  // and any previously attached listeners are destroyed with the old nodes.
+  window.__wireStaticCandButtons = function(root){
+    var scope = root || document;
+    scope.querySelectorAll('[data-add-cand-btn]').forEach(function(btn){
+      var id = btn.dataset.addCandBtn;
+      var input = scope.querySelector('[data-add-cand-input="' + id + '"]');
+      if (!input) return;
+      var atLimit = countFor(id) >= LIMIT;
+      btn.disabled = atLimit;
+      input.disabled = atLimit;
+      if (!atLimit){ input.placeholder = 'Tên thí sinh'; }
+
+      btn.addEventListener('click', function(){
+        if (btn.disabled) return;
+        var name = (input.value || '').trim();
+        if (!name) return;
+
+        var body = new URLSearchParams();
+        body.set(ENTRY.village, villageNameFor(id));
+        body.set(ENTRY.name, name);
+
+        var oldText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Đang gửi…';
+
+        fetch(GOOGLE_FORM_URL, { method: 'POST', mode: 'no-cors', body: body })
+          .then(function(){
+            input.value = '';
+            btn.textContent = 'Đã gửi \u2713';
+            setTimeout(function(){ btn.textContent = oldText; btn.disabled = false; }, 2500);
+          })
+          .catch(function(err){
+            btn.disabled = false;
+            btn.textContent = oldText;
+            alert('Gửi thất bại, vui lòng thử lại.');
+          });
+      });
+      // Enter-to-submit is already wired by the main script's own
+      // data-add-cand-input keydown handler, which calls btn.click() —
+      // that reaches this listener too, so no separate one is needed here.
+    });
+  };
+  window.__wireStaticCandButtons(document);
+})();
+</script>
+
+<script>
+(function(){
+  if (!window.IS_STATIC_EXPORT) return;
+  var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx9ubhxd5SoKU6ryApWTrS_iw0Tx8kIWWQZLOFE_43NU7TDkEbwIsfFQ2Ae83DHZAONLA/exec";
+
+  function villageIdForName(name){
+    var villages = window.STATIC_VILLAGES || {};
+    var ids = Object.keys(villages);
+    for (var i = 0; i < ids.length; i++){
+      if (villages[ids[i]].name === name) return ids[i];
+    }
+    return null;
+  }
+
+  function fetchAndMergeLive(){
+    var boothsDone = fetch(APPS_SCRIPT_URL + '?type=booth')
+      .then(function(r){ return r.json(); })
+      .then(function(rows){
+        var list = (rows || []).map(function(row, i){
+          return {
+            id: 'sheet-booth-' + i,
+            boothName: row['Tên gian hàng'] || '',
+            owner: row['Chủ gian hàng'] || '',
+            item: row['Mặt hàng'] || '',
+            bannerUrl: row['Banner (link ảnh, không bắt buộc)'] || row['Banner'] || '',
+            status: row['Duyệt'] === 'Có' ? 'approved' : 'pending',
+            createdAt: Date.parse(row['Timestamp']) || 0
+          };
+        });
+        if (typeof window.__staticSetBooths === 'function') window.__staticSetBooths(list);
+      })
+      .catch(function(err){ console.error('live booth fetch failed', err); });
+
+    var candsDone = fetch(APPS_SCRIPT_URL + '?type=candidate')
+      .then(function(r){ return r.json(); })
+      .then(function(rows){
+        var map = {};
+        (rows || []).forEach(function(row){
+          var villageId = villageIdForName(row['Làng phụ trách']) || 'v1';
+          var name = row['Tên thí sinh'] || '';
+          if (!name) return;
+          if (!map[villageId]) map[villageId] = { villageName: row['Làng phụ trách'] || villageId, entries: [] };
+          map[villageId].entries.push({ name: name, approved: row['Duyệt'] === 'Có' });
+        });
+        if (typeof window.__staticSetCandidates === 'function') window.__staticSetCandidates(map);
+      })
+      .catch(function(err){ console.error('live candidate fetch failed', err); });
+
+    return Promise.all([boothsDone, candsDone]);
+  }
+
+  window.__staticRefreshLive = fetchAndMergeLive;
+  fetchAndMergeLive();
+  setInterval(fetchAndMergeLive, 30000);
 })();
 </script>
 
